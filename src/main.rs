@@ -49,7 +49,8 @@ fn handle_connection(mut stream: TcpStream) {
             // Outcome: If unused, Chrome will close the speculative connection after a certain duration, resulting in an apparent blank request on the server.
             // Additional Info:
             // - To manually close these idle sockets, use: chrome://net-internals/#sockets
-            // - For an in-depth look, visit: https://www.igvita.com/posa/high-performance-networking-in-google-chrome/#tcp-pre-connect
+            // - https://www.igvita.com/posa/high-performance-networking-in-google-chrome/#tcp-pre-connect
+            // - https://bugs.chromium.org/p/chromium/issues/detail?id=116982#c5
 
             eprintln!("No lines to read from the stream.");
             return;
