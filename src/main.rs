@@ -9,7 +9,7 @@ use std::{
 use hello_webserver::ThreadPool;
 
 fn main() {
-    let listener = TcpListener::bind("localhost:54321").unwrap();
+    let listener = TcpListener::bind("localhost:7878").unwrap();
 
     let pool = ThreadPool::new(4);
     let mut i = 1;
@@ -27,8 +27,7 @@ fn main() {
 
 fn handle_connection(mut stream: TcpStream) {
     let buf_reader = BufReader::new(&mut stream);
-    let mut lines = buf_reader.lines();
-    let request_line_result = lines.next();
+    let request_line_result = buf_reader.lines().next();
     let request_line: String;
     match request_line_result {
         Some(Ok(line)) => {
@@ -72,4 +71,6 @@ fn handle_connection(mut stream: TcpStream) {
     let response = format!("{status_line}\r\nContent-Length: {length}\r\n\r\n{contents}");
 
     stream.write_all(response.as_bytes()).unwrap();
+
+    // Connection is closed when stream is dropped.
 }
