@@ -34,7 +34,7 @@ fn handle_connection(mut stream: TcpStream) {
             request_line = line;
         }
         Some(Err(e)) => {
-            eprintln!("Error reading line: {}", e);
+            eprintln!("Error reading: {}", e);
             return;
         }
         None => {
@@ -51,7 +51,7 @@ fn handle_connection(mut stream: TcpStream) {
             // - https://www.igvita.com/posa/high-performance-networking-in-google-chrome/#tcp-pre-connect
             // - https://bugs.chromium.org/p/chromium/issues/detail?id=116982#c5
 
-            eprintln!("No lines to read from the stream.");
+            eprintln!("Nothing to read from the stream.");
             return;
         }
     }
